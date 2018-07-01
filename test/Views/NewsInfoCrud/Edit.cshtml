@@ -1,0 +1,35 @@
+﻿@model test.Models.NewsInfo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Edit", "NewsInfoCrud", FormMethod.Post))
+        {
+            <span>编号：</span>
+            @Model.nid;
+            @Html.HiddenFor(n => n.nid);
+            <br />
+            <span>标题：</span>
+            @Html.EditorFor(n => n.nTitle);
+            <br />
+            <span>类型：</span>
+            @*@Model.NewsType.tTitle;*@
+
+            @*@Model.nTid;*@
+            @Html.DropDownListFor(n => n.nTid, ViewBag.Type as IEnumerable<SelectListItem>);
+            @*@Html.HiddenFor(n => n.nTid);*@
+            <br />
+            <input type="submit" value="修改" />
+        }
+    </div>
+</body>
+</html>

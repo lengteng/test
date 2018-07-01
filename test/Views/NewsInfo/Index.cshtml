@@ -1,0 +1,29 @@
+﻿@using test.Models;
+@model IQueryable<test.Models.NewsTypeViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            @foreach (var NewsT in Model)
+            {
+                var ui = NewsT as NewsTypeViewModel;
+                <tr>
+
+                    <td>@ui.Ntitle</td>
+                    <td>@ui.Ttitle</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

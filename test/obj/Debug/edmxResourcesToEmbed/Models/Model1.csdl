@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="NewsInfo">
+    <Key>
+      <PropertyRef Name="nid" />
+    </Key>
+    <Property Name="nid" Type="Int32" Nullable="false" />
+    <Property Name="nTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nTid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NewsType" Relationship="Self.FK_NewsInfo_NewsType" FromRole="NewsInfo" ToRole="NewsType" />
+  </EntityType>
+  <EntityType Name="NewsType">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NewsInfo" Relationship="Self.FK_NewsInfo_NewsType" FromRole="NewsType" ToRole="NewsInfo" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="UID" />
+    </Key>
+    <Property Name="UID" Type="Int32" Nullable="false" />
+    <Property Name="UName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_NewsInfo_NewsType">
+    <End Role="NewsType" Type="Self.NewsType" Multiplicity="1" />
+    <End Role="NewsInfo" Type="Self.NewsInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsType">
+        <PropertyRef Name="tid" />
+      </Principal>
+      <Dependent Role="NewsInfo">
+        <PropertyRef Name="nTid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="NewsInfo" EntityType="Self.NewsInfo" />
+    <EntitySet Name="NewsType" EntityType="Self.NewsType" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+    <AssociationSet Name="FK_NewsInfo_NewsType" Association="Self.FK_NewsInfo_NewsType">
+      <End Role="NewsType" EntitySet="NewsType" />
+      <End Role="NewsInfo" EntitySet="NewsInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

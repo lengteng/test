@@ -1,0 +1,51 @@
+﻿@using test.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index1</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+            </tr>
+
+            @*@foreach (var userInfo in Model)
+                {
+
+                    <tr>
+                        <td>@userInfo.UID</td>
+                        <td>@userInfo.UName</td>
+                    </tr>
+                }*@
+            @*@foreach (var ui in Model)
+                {
+
+                    <tr>
+                        <td>@ui</td>
+
+                    </tr>
+                }*@
+            @foreach (var userInfo in Model)
+            {
+                var ui = userInfo as UserInfoViewModel;
+                <tr>
+
+                    <td>@ui.Uid</td>
+                    <td>@ui.UName</td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</body>
+</html>
